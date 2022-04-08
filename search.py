@@ -9,7 +9,7 @@ class Search:
         self.client = tweepy.Client(token)
 
 
-    def search_recent_tweets(self, criteria, since):
+    def search_recent_tweets(self, criteria, since=None):
         try:
             response = self.client.search_recent_tweets(query=criteria, start_time=since)
             results = response.data
@@ -34,11 +34,12 @@ class Search:
             print(f'uh oh...{e}')
 
 
-query = "Lightning (Ford OR F-150 OR F150) lang:en -is:retweet -is:reply"
+if __name__ == "__main__":
+    query = "Lightning (Ford OR F-150 OR F150) lang:en -is:retweet -is:reply"
 
-searcher = Search(BEARER_TOKEN)
-since = datetime.utcnow() - timedelta(hours=1)
-searcher.search_recent_tweets(query, since)
+    searcher = Search(BEARER_TOKEN)
+    since = datetime.utcnow() - timedelta(hours=10)
+    searcher.search_recent_tweets(query)#, since)
 
 
 

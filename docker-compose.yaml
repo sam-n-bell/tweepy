@@ -1,0 +1,19 @@
+version: "3.5"
+services:
+  search:
+    container_name: "search"
+    build:
+      context: .
+    depends_on:
+      - searchdb
+  searchdb:
+    image: postgres:13.6
+    container_name: searchdb
+    ports:
+      - "5432:5432"
+    env_file:
+      - searchdb.env
+    volumes:
+      - searchdb:/var/lib/postgresql/data
+volumes:
+  searchdb:
